@@ -1,0 +1,44 @@
+{
+  "name": "node-red-contrib-protobuf",
+  "version": "0.1.0",
+  "description": "Protocol buffer encode/decode nodes.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "mocha \"test/**/*spec.js\"",
+    "coverage": "istanbul cover _mocha $(find ./lib -name \"*.spec.js\" -not -path \"./node_modules/*\")",
+    "lint": "eslint \"src/**/*.js\"",
+    "lint-fix": "eslint --fix \"src/**/*.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/othermo/node-red-contrib-protobuf.git"
+  },
+  "keywords": [
+    "node-red",
+    "protobuf"
+  ],
+  "author": "Alexander Wellbrock <a.wellbrock@mailbox.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/othermo/node-red-contrib-protobuf/issues"
+  },
+  "homepage": "https://gitlab.com/othermo/node-red-contrib-protobuf#README",
+  "node-red": {
+    "nodes": {
+      "encode": "src/nodes/encode.js",
+      "decode": "src/nodes/decode.js",
+      "file": "src/nodes/protofile.js"
+    }
+  },
+  "devDependencies": {
+    "eslint": "^5.0.1",
+    "istanbul": "^0.4.5",
+    "mocha": "^5.2.0",
+    "node-red": "^0.18.7",
+    "node-red-node-test-helper": "^0.1.8",
+    "should": "^13.2.1"
+  },
+  "dependencies": {
+    "protobufjs": "^6.8.8"
+  }
+}
