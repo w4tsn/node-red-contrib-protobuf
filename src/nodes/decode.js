@@ -10,7 +10,7 @@ module.exports = function (RED) {
 
         let resolveMessageType = function (msg) {
             if (!msg.protobufType) {
-                if (!node.protoType) node.error('No protobuf type supplied!');
+                if (!node.protoType) return node.error('No protobuf type supplied!');
                 msg.protobufType = node.protoType;
             }
             let messageType;
@@ -39,7 +39,7 @@ module.exports = function (RED) {
 
         node.on('input', function (msg) {
             let messageType = resolveMessageType(msg);
-
+            if (messageType === null) return;
             let message;
             try {
                 message = messageType.decode(msg.payload);

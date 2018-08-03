@@ -7,7 +7,7 @@ module.exports = function (RED) {
         var node = this;
         node.on('input', function (msg) {
             if (!msg.protobufType) {
-                if (!node.protoType) node.error('No protobuf type supplied!');
+                if (!node.protoType) return node.error('No protobuf type supplied!');
                 msg.protobufType = node.protoType;
             }
             let messageType;
