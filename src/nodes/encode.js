@@ -6,9 +6,13 @@ module.exports = function (RED) {
         this.protoType = config.protoType;
         var node = this;
         node.on('input', function (msg) {
+            if (!msg.protobufType) {
+                if (!node.protoType) node.error('No protobuf type supplied!');
+                msg.protobufType = node.protoType;
+            }
             let messageType;
             try {
-                messageType = node.protofile.prototypes.lookupType(node.protoType);
+                messageType = node.protofile.prototypes.lookupType(msg.protobufType);
             }
             catch (error) {
                 console.log(error);
@@ -20,7 +24,7 @@ module.exports = function (RED) {
                 > Prototypes content:
                 ${node.protofile.prototypes}
                 > With configured protoType:
-                ${node.protoType}`);
+                ${msg.protobufType}`);
             }
             // check if msg.payload is a valid message under respective
             // selected protobuf message type
@@ -30,7 +34,6 @@ module.exports = function (RED) {
             }
             // create a protobuf message and convert it into a buffer
             msg.payload = messageType.encode(messageType.create(msg.payload)).finish();
-            msg.protobufType = node.protoType;
             node.send(msg);
         });
     }

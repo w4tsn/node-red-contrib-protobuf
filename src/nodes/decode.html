@@ -5,7 +5,7 @@
         defaults: {
             name: { value: "" },
             protofile: { value: "", type: "protobuf-file" },
-            protoType: { value: "", required: true },
+            protoType: { value: "" },
         },
         inputs: 1,
         outputs: 1,
@@ -33,6 +33,20 @@
 
 <script type="text/x-red" data-help-name="decode">
     <p>Select a proto type definition from a proto file to decode incoming messages.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">buffer</span>
+        </dt>
+        <dd>
+            a buffer binary message containing the protobuf encoded message.
+        </dd>
+        <dt>protobufType
+            <span class="property-type">string</span>
+        </dt>
+        <dd>
+            the identifier string of the corresponding protobuf type definition of the message.
+        </dd>
     <h3>Outputs</h3>
     <dl class="message-properties">
         <dt>payload
@@ -50,4 +64,5 @@
     <h3>Details</h3>
     <p>When supplied with a protobuf type from the protofile the node will decode the message into a javascript object.</p>
     <p>The current settings are set such that longs, enums and strings are decoded into string and default values are not taken into account.</p>
+    <p>If a message is incomplete regarding the protobuf type all fields that can be decoded will be decoded resulting in a partial decoded message at the output.</p>
 </script>

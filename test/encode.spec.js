@@ -79,4 +79,25 @@ describe('protobuf encode node', function () {
     });
   });
 
+  it('should encode a message into a buffer with type specified in incomming message', function (done) {
+    helper.load([encode, protofile], encodeFlow, function () {
+      let testMessage = {
+        timestamp: 1533295590569,
+        foo: 1.0,
+        bar: true,
+        test: 'A string value'
+      };
+      var encodeNode = helper.getNode('encode-node');
+      var helperNode = helper.getNode('helper-node');
+      helperNode.on('input', function (msg) {
+        should(msg.payload instanceof Buffer).equal(true);
+        done();
+      });
+      encodeNode.receive({
+        payload: testMessage,
+        protobufType: 'TestType'
+      });
+    });
+  });
+
 });

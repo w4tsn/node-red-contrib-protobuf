@@ -11,8 +11,7 @@
                 type: "protobuf-file"
             },
             protoType: {
-                value: "",
-                required: true
+                value: ""
             },
         },
         inputs: 1,
@@ -44,6 +43,20 @@
 
 <script type="text/x-red" data-help-name="encode">
     <p>Select a proto type definition from a proto file and encode incoming messages.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">object</span>
+        </dt>
+        <dd>
+            a javascript object reflecting the fields provided in the specified protobuf type.
+        </dd>
+        <dt>protobufType
+            <span class="property-type">string</span>
+        </dt>
+        <dd>
+            the identifier string of the corresponding protobuf type definition of the message.
+        </dd>
     <h3>Outputs</h3>
     <dl class="message-properties">
         <dt>payload
