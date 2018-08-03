@@ -39,7 +39,7 @@ module.exports = function (RED) {
 
         node.on('input', function (msg) {
             let messageType = resolveMessageType(msg);
-            if (messageType === null) return;
+            if (!messageType) return;
             let message;
             try {
                 message = messageType.decode(msg.payload);
