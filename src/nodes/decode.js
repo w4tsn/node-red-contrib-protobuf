@@ -18,21 +18,22 @@ module.exports = function (RED) {
                 messageType = node.protofile.prototypes.lookupType(msg.protobufType);
             }
             catch (error) {
-                node.error(`
-                Problem while looking up the message type.
-                ${error}
-                > Protofile object:
-                ${node.protofile}
-                > Prototypes content:
-                ${node.protofile.prototypes}
-                > With configured protoType:
-                ${msg.protobufType}`);
+                return node.error(
+                    `Problem while looking up the message type.
+                    ${error}
+                    > Protofile object:
+                    ${node.protofile}
+                    > Prototypes content:
+                    ${node.protofile.prototypes}
+                    > With configured protoType:
+                    ${msg.protobufType}`
+                );
             }
             // check if msg.payload is a valid message under respective
             // selected protobuf message type
             let result = messageType.verify(msg.payload);
             if (result) {
-                node.error('Message is not valid under selected message type. ' + result);
+                return node.error('Message is not valid under selected message type. ' + result);
             }
             return messageType;
         };
@@ -51,7 +52,7 @@ module.exports = function (RED) {
                     node.send(msg);
                 }
                 else {
-                    node.error('Wire format is invalid.');
+                    return node.error('Wire format is invalid.');
                 }
             }
             let decodeoptions = {
