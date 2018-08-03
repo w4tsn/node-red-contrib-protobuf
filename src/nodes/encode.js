@@ -15,7 +15,6 @@ module.exports = function (RED) {
                 messageType = node.protofile.prototypes.lookupType(msg.protobufType);
             }
             catch (error) {
-                console.log(error);
                 node.error(`
                 Problem while looking up the message type. 
                 ${error}

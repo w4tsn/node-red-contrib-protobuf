@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-protobuf",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Protocol buffer encode/decode nodes.",
   "main": "src/index.js",
   "scripts": {
@@ -11,18 +11,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/othermo/node-red-contrib-protobuf.git"
+    "url": "git+ssh://git@github.com/w4tsn/node-red-contrib-protobuf.git"
   },
   "keywords": [
     "node-red",
     "protobuf"
   ],
   "author": "Alexander Wellbrock <a.wellbrock@mailbox.org>",
-  "license": "MIT",
+  "license": "BSD-3",
   "bugs": {
-    "url": "https://gitlab.com/othermo/node-red-contrib-protobuf/issues"
+    "url": "https://github.com/w4tsn/node-red-contrib-protobuf/issues"
   },
-  "homepage": "https://gitlab.com/othermo/node-red-contrib-protobuf#README",
+  "homepage": "https://github.com/w4tsn/node-red-contrib-protobuf#README",
   "node-red": {
     "nodes": {
       "encode": "src/nodes/encode.js",

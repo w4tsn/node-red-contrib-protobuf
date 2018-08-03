@@ -35,7 +35,7 @@ module.exports = function (RED) {
                 node.error('Message is not valid under selected message type. ' + result);
             }
             return messageType;
-        }
+        };
 
         node.on('input', function (msg) {
             let messageType = resolveMessageType(msg);

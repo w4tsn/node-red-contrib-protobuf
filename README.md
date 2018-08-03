@@ -20,7 +20,7 @@ This node depends on protobufjs as the main package and will install it along wi
 2. Place an encode/decode node on a flow
 3. Open the editor and add a new protofile configuration node
 4. Supply the path to your `.proto` file
-5. Either supply a proto type 
+5. Either supply a proto type
     1. within the encode/decode configuration
     2. with the `msg.protobufType` field (takes precedence over node configuration)
 
@@ -61,3 +61,4 @@ The BSD 3-Clause License
 * validate type from loaded .proto files
 * allow `.proto`-path to be a URL
 * expose more configuration parameters from the protobufjs API
+* write tests covering misconfiguration and errors/exceptions
