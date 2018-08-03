@@ -57,6 +57,7 @@
         <dd>
             the identifier string of the corresponding protobuf type definition of the message.
         </dd>
+    </dl>
     <h3>Outputs</h3>
     <dl class="message-properties">
         <dt>payload
@@ -71,6 +72,8 @@
         <dd>
             the identifier string of the corresponding protobuf type definition of the message
         </dd>
+    </dl>
     <h3>Details</h3>
     <p>When supplied with a protobuf type from the protofile the node will encode the message with protobufjs defaults into a binary buffer object.</p>
+    <p>The protobufType from a message always takes precedence over the node defined type.</p>
 </script>
