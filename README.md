@@ -24,6 +24,8 @@ This node depends on protobufjs as the main package and will install it along wi
     1. within the encode/decode configuration
     2. with the `msg.protobufType` field (takes precedence over node configuration)
 
+*Note on the protofile node* If the file contents of the `.proto`-file change on disk, a redeploy of the config node is necessary since it does not track changes on the file system or reload the file on every incoming message.
+
 ## Contribution
 
 To setup your local development environment first clone this repository and then use docker to get your node-red environment up and running like this:
