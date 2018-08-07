@@ -24,7 +24,7 @@ This node depends on protobufjs as the main package and will install it along wi
     1. within the encode/decode configuration
     2. with the `msg.protobufType` field (takes precedence over node configuration)
 
-*Note on the protofile node* If the file contents of the `.proto`-file change on disk, a redeploy of the config node is necessary since it does not track changes on the file system or reload the file on every incoming message.
+*Note on the protofile node* The proto file node watches the specified file for changes on the filesystem through nodejs fs API. If the file contents of the `.proto`-file change on disk, the file becomes reloaded. This may happen multiple times at once due to OS and editor specifics.
 
 ## Contribution
 
