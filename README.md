@@ -1,4 +1,6 @@
 # node-red-contrib-protobuf
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fw4tsn%2Fnode-red-contrib-protobuf.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fw4tsn%2Fnode-red-contrib-protobuf?ref=badge_shield)
+
 
 This project features protobuf encode/decode nodes. Load a proto file, supply a desired type for encoding or decoding and have fun.
 
@@ -57,6 +59,9 @@ npm run lint
 The BSD 3-Clause License
 
 [Alexander Wellbrock](https://w4tsn.github.io/blog)
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fw4tsn%2Fnode-red-contrib-protobuf.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fw4tsn%2Fnode-red-contrib-protobuf?ref=badge_large)
 
 ## Roadmap
 
