@@ -17,6 +17,8 @@ module.exports = function (RED) {
 
         load();
 
+        if (protoFileNode.prototypes === undefined) return;
+
         try {
             protoFileNode.protoFileWatcher = fs.watch(config.protopath, (eventType) => {
                 if (eventType === 'change') {

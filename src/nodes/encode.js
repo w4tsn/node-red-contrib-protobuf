@@ -10,6 +10,9 @@ module.exports = function (RED) {
                 if (!node.protoType) return node.error('No protobuf type supplied!');
                 msg.protobufType = node.protoType;
             }
+            if (node.protofile.prototypes === undefined) {
+                return node.error('No .proto types loaded! Check that the file exists and that node-red has permission to access it.');
+            }
             let messageType;
             try {
                 messageType = node.protofile.prototypes.lookupType(msg.protobufType);
