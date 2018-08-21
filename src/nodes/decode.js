@@ -18,16 +18,16 @@ module.exports = function (RED) {
                 messageType = node.protofile.prototypes.lookupType(msg.protobufType);
             }
             catch (error) {
-                return node.error(
-                    `Problem while looking up the message type.
-                    ${error}
-                    > Protofile object:
-                    ${node.protofile}
-                    > Prototypes content:
-                    ${node.protofile.prototypes}
-                    > With configured protoType:
-                    ${msg.protobufType}`
-                );
+                return node.error(`
+Problem while looking up the message type.
+${error}
+Protofile object:
+${node.protofile.protopath}
+Prototypes content:
+${JSON.stringify(node.protofile.prototypes)}
+With configured protoType:
+${msg.protobufType}
+                `);
             }
             // check if msg.payload is a valid message under respective
             // selected protobuf message type
