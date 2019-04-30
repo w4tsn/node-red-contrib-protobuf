@@ -1,5 +1,5 @@
 {
-  "name": "node-red-contrib-protobuf-defonzie",
+  "name": "node-red-contrib-protobuf",
   "version": "1.0.3",
   "description": "Protocol buffer encode/decode nodes.",
   "main": "src/index.js",
