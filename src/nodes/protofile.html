@@ -2,7 +2,7 @@
     RED.nodes.registerType('protobuf-file', {
         category: 'config',
         defaults: {
-            protopath: { value: "", required: true, validate:RED.validators.regex(/^(\/[^\/ ]*)+\/?$/) },
+            protopath: { value: "", required: true },
             prototypes: { value: "" }
         },
         label: function() {
