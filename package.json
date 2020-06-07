@@ -34,8 +34,8 @@
     "eslint": "^5.0.1",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
-    "node-red": "^0.18.7",
-    "node-red-node-test-helper": "^0.1.8",
+    "node-red": "^1.0.6",
+    "node-red-node-test-helper": "^0.2.5",
     "should": "^13.2.1"
   },
   "dependencies": {
