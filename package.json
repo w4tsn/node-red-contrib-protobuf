@@ -31,12 +31,12 @@
     }
   },
   "devDependencies": {
-    "eslint": "^7.2.0",
-    "nyc": "^15.1.0",
-    "mocha": "^7.2.0",
-    "node-red": "^1.0.6",
-    "node-red-node-test-helper": "^0.2.5",
-    "should": "^13.2.3"
+    "eslint": "7.2.0",
+    "nyc": "15.1.0",
+    "mocha": "7.2.0",
+    "node-red": "1.0.6",
+    "node-red-node-test-helper": "0.2.5",
+    "should": "13.2.3"
   },
   "dependencies": {
     "protobufjs": "^6.9.0"
