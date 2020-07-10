@@ -3,7 +3,8 @@
         category: 'config',
         defaults: {
             protopath: { value: "", required: true },
-            prototypes: { value: "" }
+            prototypes: { value: "" },
+            watchFile: { value: true }
         },
         label: function() {
             return this.protopath;
@@ -15,6 +16,8 @@
     <div class="form-row">
         <label for="node-config-input-protopath"><i class="icon-file"></i> Path</label>
         <input type="text" id="node-config-input-protopath">
+        <label for="node-config-input-watchFile"> Watch File</label>
+        <input type="checkbox" id="node-config-input-watchFile">
     </div>
 </script>
 
