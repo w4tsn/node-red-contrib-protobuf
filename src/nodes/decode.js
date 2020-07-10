@@ -9,19 +9,22 @@ module.exports = function (RED) {
         var node = this;
 
         let resolveMessageType = function (msg) {
-            if (!msg.protobufType) {
-                if (!node.protoType) return node.error('No protobuf type supplied!');
-                msg.protobufType = node.protoType;
+            msg.protobufType = msg.protobufType || node.protoType;
+            if (msg.protobufType === undefined) {
+                node.error('No protobuf type supplied!');
+                return node.status({fill: 'red', shape: 'dot', text: 'Protobuf type missing'});
             }
             if (node.protofile.protoTypes === undefined) {
-                return node.error('No .proto types loaded! Check that the file exists and that node-red has permission to access it.');
+                node.error('No .proto types loaded! Check that the file exists and that node-red has permission to access it.');
+                return node.status({fill: 'red', shape: 'dot', text: 'Protofile not ready'});
             }
+            node.status({fill: 'green', shape: 'dot', text: 'Ready'});
             let messageType;
             try {
                 messageType = node.protofile.protoTypes.lookupType(msg.protobufType);
             }
             catch (error) {
-                return node.error(`
+                node.warn(`
 Problem while looking up the message type.
 ${error}
 Protofile object:
@@ -31,6 +34,7 @@ ${JSON.stringify(node.protofile.protoTypes)}
 With configured protoType:
 ${msg.protobufType}
                 `);
+                node.status({fill: 'yellow', shape: 'dot', text: 'Message type not found'});
             }
             return messageType;
         };
@@ -45,11 +49,13 @@ ${msg.protobufType}
             catch (exception) {
                 if (exception instanceof protobufjs.util.ProtocolError) {
                     node.warn('Received message contains empty fields. Uncomplete message will be forwarded.');
+                    node.status({fill: 'yellow', shape: 'dot', text: 'Message incomplete'});
                     msg.payload = e.instance;
                     node.send(msg);
                 }
                 else {
-                    return node.error('Wire format is invalid.');
+                    node.warn('Wire format is invalid.');
+                    return node.status({fill: 'yellow', shape: 'dot', text: 'Wire format invalid'});
                 }
             }
             let decodeoptions = {
@@ -59,6 +65,7 @@ ${msg.protobufType}
                 defaults: false, // includes default values, otherwise not transmitted values will be assigned their default value!
             };
             msg.payload = messageType.toObject(message, decodeoptions);
+            node.status({fill: 'green', shape: 'dot', text: 'Processed'});
             node.send(msg);
         });
     }

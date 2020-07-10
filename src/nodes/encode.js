@@ -6,19 +6,22 @@ module.exports = function (RED) {
         this.protoType = config.protoType;
         var node = this;
         node.on('input', function (msg) {
-            if (!msg.protobufType) {
-                if (!node.protoType) return node.error('No protobuf type supplied!');
-                msg.protobufType = node.protoType;
+            msg.protobufType = msg.protobufType || node.protoType;
+            if (msg.protobufType === undefined) {
+                node.error('No protobuf type supplied!');
+                return node.status({fill: 'red', shape: 'dot', text: 'Protobuf type missing'});
             }
             if (node.protofile.protoTypes === undefined) {
-                return node.error('No .proto types loaded! Check that the file exists and that node-red has permission to access it.');
+                node.error('No .proto types loaded! Check that the file exists and that node-red has permission to access it.');
+                return node.status({fill: 'red', shape: 'dot', text: 'Protofile not ready'});
             }
+            node.status({fill: 'green', shape: 'dot', text: 'Ready'});
             let messageType;
             try {
                 messageType = node.protofile.protoTypes.lookupType(msg.protobufType);
             }
             catch (error) {
-                return node.error(`
+                node.warn(`
 Problem while looking up the message type.
 ${error}
 Protofile object:
@@ -28,15 +31,15 @@ ${JSON.stringify(node.protofile.protoTypes)}
 With configured protoType:
 ${msg.protobufType}
                 `);
+                return node.status({fill: 'yellow', shape: 'dot', text: 'Message type not found'});
             }
-            // check if msg.payload is a valid message under respective
-            // selected protobuf message type
-            let result = messageType.verify(msg.payload);
-            if (result) {
-                return node.error('Message is not valid under selected message type. ' + result);
+            if (messageType.verify(msg.payload)) {
+                node.warn('Message is not valid under selected message type.');
+                return node.status({fill: 'yellow', shape: 'dot', text: 'Message invalid'});
             }
             // create a protobuf message and convert it into a buffer
             msg.payload = messageType.encode(messageType.create(msg.payload)).finish();
+            node.status({fill: 'green', shape: 'dot', text: 'Processed'});
             node.send(msg);
         });
     }
