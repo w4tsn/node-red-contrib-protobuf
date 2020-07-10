@@ -6,27 +6,29 @@ module.exports = function (RED) {
         RED.nodes.createNode(this, config);
         this.protopath = config.protopath;
         protoFileNode = this;
-        let load = function () {
+        protoFileNode.load = function () {
             try {
-                protoFileNode.prototypes = protobufjs.loadSync(config.protopath);
+                protoFileNode.protoTypes = protobufjs.loadSync(protoFileNode.protopath);
             }
             catch (error) {
                 protoFileNode.error('Proto file could not be loaded. ' + error);
             }
         };
 
-        load();
+        protoFileNode.load();
 
-        if (protoFileNode.prototypes === undefined) return;
+        if (protoFileNode.protoTypes === undefined) return;
 
         try {
-            protoFileNode.protoFileWatcher = fs.watchFile(config.protopath, (eventType) => {
+            protoFileNode.protoFileWatcher = fs.watch(protoFileNode.protopath, (eventType) => {
                 if (eventType === 'change') {
-                    load();
-                    protoFileNode.warn('Protobuf file changed on disk. Reloaded.');
+                    protoFileNode.load();
+                    protoFileNode.log('Protobuf file changed on disk. Reloaded.');
                 }
             });
-            protoFileNode.on('close', () => fs.unwatchFile(config.protopath));
+            protoFileNode.on('close', () => {
+                protoFileNode.protoFileWatcher.close();
+            });
         }
         catch (error) {
             protoFileNode.error('Error when trying to watch the file on disk: ' + error);

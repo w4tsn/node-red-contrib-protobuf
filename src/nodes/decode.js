@@ -13,12 +13,12 @@ module.exports = function (RED) {
                 if (!node.protoType) return node.error('No protobuf type supplied!');
                 msg.protobufType = node.protoType;
             }
-            if (node.protofile.prototypes === undefined) {
+            if (node.protofile.protoTypes === undefined) {
                 return node.error('No .proto types loaded! Check that the file exists and that node-red has permission to access it.');
             }
             let messageType;
             try {
-                messageType = node.protofile.prototypes.lookupType(msg.protobufType);
+                messageType = node.protofile.protoTypes.lookupType(msg.protobufType);
             }
             catch (error) {
                 return node.error(`
@@ -27,7 +27,7 @@ ${error}
 Protofile object:
 ${node.protofile.protopath}
 Prototypes content:
-${JSON.stringify(node.protofile.prototypes)}
+${JSON.stringify(node.protofile.protoTypes)}
 With configured protoType:
 ${msg.protobufType}
                 `);
