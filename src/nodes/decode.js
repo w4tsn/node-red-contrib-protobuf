@@ -48,13 +48,13 @@ ${msg.protobufType}
             }
             catch (exception) {
                 if (exception instanceof protobufjs.util.ProtocolError) {
-                    node.warn('Received message contains empty fields. Uncomplete message will be forwarded.');
+                    node.warn('Received message contains empty fields. Incomplete message will be forwarded.');
                     node.status({fill: 'yellow', shape: 'dot', text: 'Message incomplete'});
                     msg.payload = e.instance;
                     node.send(msg);
                 }
                 else {
-                    node.warn('Wire format is invalid.');
+                    node.warn('Wire format is invalid: '+exception);
                     return node.status({fill: 'yellow', shape: 'dot', text: 'Wire format invalid'});
                 }
             }
