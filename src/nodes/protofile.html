@@ -15,14 +15,14 @@
 <script type="text/x-red" data-template-name="protobuf-file">
     <div class="form-row">
         <label for="node-config-input-protopath"><i class="icon-file"></i> Path</label>
-        <input type="text" id="node-config-input-protopath">
+        <input type="text" id="node-config-input-protopath"/>
         <label for="node-config-input-watchFile"> Watch File</label>
-        <input type="checkbox" id="node-config-input-watchFile">
+        <input type="checkbox" id="node-config-input-watchFile"/>
     </div>
 </script>
 
 <script type="text/x-red" data-help-name="protobuf-file">
-    <p>Provide a path to a .proto definition file.</p>
+    <p>Provide a path to a .proto definition file. If multiple files are needed (e.g. dependencies) then separate them with commas</p>
     <h3>Details</h3>
-    <p>If the underlying .proto file changes the config node has to be redeployed. E.g. with a full deploy.</p>
+    <p>If the underlying .proto file changes the node will be notified and update the running copy.</p>
 </script>

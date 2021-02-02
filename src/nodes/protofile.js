@@ -4,7 +4,12 @@ fs = require('fs');
 module.exports = function (RED) {
     function ProtoFileNode (config) {
         RED.nodes.createNode(this, config);
-        this.protopath = config.protopath;
+        if (config.protopath.includes(",")) {
+            this.protopath = config.protopath.split(",");
+        }
+        else {
+            this.protopath = config.protopath;
+        }
         this.watchFile = config.watchFile;
         protoFileNode = this;
         protoFileNode.load = function () {
@@ -17,7 +22,13 @@ module.exports = function (RED) {
         };
         protoFileNode.watchFile = function () {
             try {
-                protoFileNode.protoFileWatcher = fs.watch(protoFileNode.protopath, (eventType) => {
+                // if it's an array, just watch the first one, it's most likely the one likely to change.
+                // As the subsequent files are more likely dependencies on the root.
+                let watchedFile = protoFileNode.protopath;
+                if (Array.isArray(watchedFile)) {
+                    watchedFile = watchedFile[0];
+                }
+                protoFileNode.protoFileWatcher = fs.watch(watchedFile, (eventType) => {
                     if (eventType === 'change') {
                         protoFileNode.load();
                         protoFileNode.log('Protobuf file changed on disk. Reloaded.');
