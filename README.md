@@ -26,7 +26,12 @@ This node depends on protobufjs as the main package and will install it along wi
     1. within the encode/decode configuration
     2. with the `msg.protobufType` field (takes precedence over node configuration)
 
-*Note on the protofile node* The proto file node watches the specified file for changes on the filesystem through nodejs fs API. If the file contents of the `.proto`-file change on disk, the file becomes reloaded. This may happen multiple times at once due to OS and editor specifics.
+## Features
+
+* Encode JSON payload to protobuf messages
+* Decode protobuf messages to JSON payload
+* Load protobuf file(s) from the local file system
+* Consider protos from one or multiple protobuf files (including inheritance)
 
 ## Contribution
 
