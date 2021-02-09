@@ -59,21 +59,6 @@ describe('protobuf integration test', function () {
         should();
     });
 
-    it('should be loaded', function (done) {
-        var flow = [{ id: 'n1', type: 'protobuf-file', name: 'test name' },
-        { id: 'n2', type: 'encode', name: 'test name' },
-        { id: 'n3', type: 'decode', name: 'test name' }];
-        helper.load([protofile, encode, decode], flow, function () {
-            var n1 = helper.getNode('n1');
-            n1.should.have.property('name', 'test name');
-            var n2 = helper.getNode('n2');
-            n2.should.have.property('name', 'test name');
-            var n3 = helper.getNode('n3');
-            n3.should.have.property('name', 'test name');
-            done();
-        });
-    });
-
     it('should encode and decode a message with idempotence', function (done) {
         helper.load([encode, decode, protofile], integratedFlow, function () {
             let testMessage = {
