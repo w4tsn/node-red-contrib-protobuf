@@ -54,7 +54,7 @@ ${msg.protobufType}
                     node.send(msg);
                 }
                 else {
-                    node.warn('Wire format is invalid: '+exception);
+                    node.warn(`Wire format is invalid: ${exception}`);
                     return node.status({fill: 'yellow', shape: 'dot', text: 'Wire format invalid'});
                 }
             }
