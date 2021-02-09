@@ -9,10 +9,10 @@ This project features protobuf encode/decode nodes. Load a proto file, supply a 
 To install run
 
 ```bash
-npm install node-red-contrib-protobuf --production
+npm install --production --save node-red-contrib-protobuf 
 ```
 
-Omit the `--production` flag, in order to install the development dependencies for testing and coverage.
+Omit the `--production` flag, in order to install the development dependencies for testing and coverage. Omit `--save` if you don't want to add it to your package.json.
 
 This node depends on protobufjs as the main package and will install it along with it.
 
