@@ -36,19 +36,19 @@ This node depends on protobufjs as the main package and will install it along wi
 
 ## Contribution
 
-To setup your local development environment first clone this repository and then use docker to get your node-red environment up and running like this:
+To setup your local development environment first clone this repository, then use a container runtime to get your node-red environment up and running like this:
 
 ```bash
-sudo docker run -p 1880:1880 -v $PWD:/tmp/node-red-contrib-protobuf:Z -d --name nodered nodered/node-red-docker
+podman run -p 1880:1880 -v $(pwd):/tmp/node-red-contrib-protobuf -d --name nodered nodered/node-red
 ```
 
 After you saved your changes to the code update the installation within the container with this command:
 
 ```bash
-sudo docker exec -it nodered npm install /tmp/node-red-contrib-protobuf/ && sudo docker restart nodered
+podman exec -it nodered npm install /tmp/node-red-contrib-protobuf/ && podman restart nodered
 ```
 
-*Note on `--privileged` and `-u root`*: This could be required on linux machines with SELinux to avoid permission errors. Keep in mind that this is insecure and considered real bad practice. Alternativly configure your SELinux to allow access from the container to the local mounted volume in order to install the npm dependencies. This should be avoidable with the `:Z` flag behind volume definition.
+*Note on SELinux enabled machines it's necessary to allow containers access to your working directory like this: `chcon -t container_file_t $(pwd)`*
 
 ### Testing and Coverage-Report
 
