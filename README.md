@@ -75,3 +75,4 @@ The BSD 3-Clause License
 * allow `.proto`-path to be a URL
 * expose more configuration parameters from the protobufjs API
 * write tests covering misconfiguration and errors/exceptions
+* enhance the multi-file selection UI
