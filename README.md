@@ -18,13 +18,14 @@ This node depends on protobufjs as the main package and will install it along wi
 
 ## Usage
 
-1. Grab a `proto` with the message types required
-2. Place an encode/decode node on a flow
-3. Open the editor and add a new protofile configuration node
-4. Supply the path to your `.proto` file
-5. Either supply a proto type
+1. Place an encode/decode node on a flow
+2. Configure the protofile path pointing to your protobuf file(s)
+3. Either supply a proto type
     1. within the encode/decode configuration
     2. with the `msg.protobufType` field (takes precedence over node configuration)
+4. Either send a `protobuf` encoded payload to the decode node or a `JSON` encoded payload to the encode node
+
+*Note on the protofile node* The proto file node watches the specified file(s) for changes on the filesystem through nodejs fs API. If the file contents of the `.proto`-file change on disk, the file becomes reloaded. This may happen multiple times at once due to OS and editor specifics. If multiple comma-separated paths are specified, only the first one is monitored right now to save some resources.
 
 ## Features
 
