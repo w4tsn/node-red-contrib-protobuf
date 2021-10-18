@@ -34,7 +34,7 @@
     "eslint": "7.19.0",
     "nyc": "15.1.0",
     "mocha": "8.2.1",
-    "node-red": "1.2.9",
+    "node-red": "2.0.0",
     "node-red-node-test-helper": "0.2.6",
     "should": "13.2.3"
   },
