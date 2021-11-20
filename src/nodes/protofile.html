@@ -4,7 +4,8 @@
         defaults: {
             protopath: { value: "", required: true },
             prototypes: { value: "" },
-            watchFile: { value: true }
+            watchFile: { value: true },
+            keepCase: { value: false }
         },
         label: function() {
             return this.protopath;
@@ -18,6 +19,8 @@
         <input type="text" id="node-config-input-protopath"/>
         <label for="node-config-input-watchFile"> Watch File</label>
         <input type="checkbox" id="node-config-input-watchFile"/>
+        <label for="node-config-input-watchFile"> Keep snake_case (underscores)</label>
+        <input type="checkbox" id="node-config-input-keepCase"/>
     </div>
 </script>
 
@@ -25,4 +28,5 @@
     <p>Provide a path to a .proto definition file. If multiple files are needed (e.g. dependencies) then separate them with commas</p>
     <h3>Details</h3>
     <p>If the underlying .proto file changes the node will be notified and update the running copy.</p>
+    <p>By default snake_case is converted to camelCase when loading proto files. To disable this conversion use the "keep case" option.</p>
 </script>

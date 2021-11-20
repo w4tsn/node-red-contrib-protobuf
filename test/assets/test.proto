@@ -5,4 +5,5 @@ message TestType {
 	float foo = 2;
 	bool bar = 3;
 	string test = 4;
+	bool no_more_snake_case = 5;
 }

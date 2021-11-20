@@ -1,3 +1,5 @@
+const { Root } = require('protobufjs');
+
 protobufjs = require('protobufjs');
 fs = require('fs');
 
@@ -11,10 +13,11 @@ module.exports = function (RED) {
             this.protopath = config.protopath;
         }
         this.watchFile = config.watchFile;
+        this.keepCase = config.keepCase;
         protoFileNode = this;
         protoFileNode.load = function () {
             try {
-                protoFileNode.protoTypes = protobufjs.loadSync(protoFileNode.protopath);
+                protoFileNode.protoTypes = new Root().loadSync(protoFileNode.protopath, { keepCase: protoFileNode.keepCase });
             }
             catch (error) {
                 protoFileNode.error('Proto file could not be loaded. ' + error);

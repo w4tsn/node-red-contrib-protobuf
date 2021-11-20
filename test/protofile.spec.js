@@ -44,4 +44,14 @@ describe('protobuf protofile node', function () {
     });
   });
 
+  it('should load multiple files', function (done) {
+    var flow = [{ id: 'n1', type: 'protobuf-file', name: 'test name', protopath: 'test/assets/test.proto,test/assets/issue3.proto' }];
+    helper.load(protofile, flow, function () {
+      var n1 = helper.getNode('n1');
+      if (!Array.isArray(n1['protopath'])) return done(Error("protopath does not contain multiple files"))
+      if (n1['protoTypes']['TestType'] === undefined || n1['protoTypes']['Viessmann'] === undefined) return done(Error('not all types loaded'))
+      done()
+    });
+  });
+
 });
