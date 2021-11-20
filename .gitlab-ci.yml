@@ -1,4 +1,4 @@
-image: node:8
+image: node:17
 
 linting:
   script:
