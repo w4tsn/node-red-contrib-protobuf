@@ -27,6 +27,6 @@
 <script type="text/x-red" data-help-name="protobuf-file">
     <p>Provide a path to a .proto definition file. If multiple files are needed (e.g. dependencies) then separate them with commas</p>
     <h3>Details</h3>
-    <p>If the underlying .proto file changes the node will be notified and update the running copy.</p>
+    <p>If the underlying .proto file changes the node will be notified and update the running copy. Currently only the first file in the list is watched due to performance reasons.</p>
     <p>By default snake_case is converted to camelCase when loading proto files. To disable this conversion use the "keep case" option.</p>
 </script>
